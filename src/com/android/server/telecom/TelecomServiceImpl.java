@@ -65,7 +65,9 @@ import com.android.server.telecom.settings.BlockedNumbersActivity;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // TODO: Needed for move to system service: import com.android.internal.R;
 
@@ -301,8 +303,7 @@ public class TelecomServiceImpl {
                 long token = Binder.clearCallingIdentity();
                 try {
                     Log.startSession("TSI.gPAFP");
-                    return mPhoneAccountRegistrar.getPhoneAccountsForPackage(packageName,
-                            callingUserHandle);
+                    return mPhoneAccountRegistrar.getAllPhoneAccountHandlesForPackage(callingUserHandle, packageName);
                 } catch (Exception e) {
                     Log.e(this, e, "getPhoneAccountsForPackage %s", packageName);
                     throw e;
